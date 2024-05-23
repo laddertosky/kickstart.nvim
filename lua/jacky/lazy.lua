@@ -88,6 +88,7 @@ require('lazy').setup({
         map('v', '<leader>hr', function()
           gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = '[R]eset hunk' })
+        map('v', '<leader>hu', gitsigns.undo_stage_hunk, { desc = '[U]ndo staged hunk' })
       end,
     },
   },

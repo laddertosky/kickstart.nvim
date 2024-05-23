@@ -102,6 +102,10 @@ require('lazy').setup({
         end, { desc = '[R]Reset hunk' })
         map('v', '<leader>hu', gitsigns.undo_stage_hunk, { desc = '[U]Undo staged hunk' })
         map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]Stage the whole buffer' })
+        map('n', '<leader>hd', function()
+          gitsigns.diffthis '~1'
+        end, { desc = 'Show git [D]Difference of this file from last commit' })
+        map('n', '<leader>hD', gitsigns.diffthis, { desc = 'Show git [D]Difference of this file from staged' })
       end,
     },
   },
@@ -725,3 +729,5 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+

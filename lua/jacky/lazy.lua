@@ -83,7 +83,7 @@ require('lazy').setup({
           else
             gitsigns.nav_hunk 'next'
           end
-        end)
+        end, { desc = 'Next hunk' })
 
         map('n', '[c', function()
           if vim.wo.diff then
@@ -91,16 +91,17 @@ require('lazy').setup({
           else
             gitsigns.nav_hunk 'prev'
           end
-        end)
+        end, { desc = 'Prev hunk' })
 
         -- Actions
         map('v', '<leader>hs', function()
           gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = '[S]tage hunk' })
+        end, { desc = '[S]Stage hunk' })
         map('v', '<leader>hr', function()
           gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = '[R]eset hunk' })
-        map('v', '<leader>hu', gitsigns.undo_stage_hunk, { desc = '[U]ndo staged hunk' })
+        end, { desc = '[R]Reset hunk' })
+        map('v', '<leader>hu', gitsigns.undo_stage_hunk, { desc = '[U]Undo staged hunk' })
+        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]Stage the whole buffer' })
       end,
     },
   },

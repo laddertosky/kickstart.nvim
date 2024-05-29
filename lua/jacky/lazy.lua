@@ -60,12 +60,11 @@ require('lazy').setup({
       current_line_blame_formatter_opts = {
         relative_time = false,
       },
-      on_attach = function(bufnr)
+      on_attach = function(_)
         local gitsigns = require 'gitsigns'
 
         local function map(mode, l, r, opts)
           opts = opts or {}
-          opts.buffer = bufnr
           vim.keymap.set(mode, l, r, opts)
         end
 

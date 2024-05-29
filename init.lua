@@ -14,3 +14,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require 'jacky.global'
 require 'jacky.keymap'
 require 'jacky.lazy'
+require 'jacky.gitcmd'

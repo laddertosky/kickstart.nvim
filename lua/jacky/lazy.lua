@@ -692,6 +692,9 @@ require('lazy').setup({
     end,
   },
   {
+    'nvim-treesitter/nvim-treesitter-context',
+  },
+  {
     'nvim-tree/nvim-tree.lua',
     version = '*',
     lazy = false,

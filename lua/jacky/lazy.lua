@@ -54,6 +54,7 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  { 'tpope/vim-fugitive' },
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
   --    require('gitsigns').setup({ ... })
@@ -103,15 +104,20 @@ require('lazy').setup({
         map('v', '<leader>hs', function()
           gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = '[S]Stage hunk' })
+
         map('v', '<leader>hr', function()
           gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = '[R]Reset hunk' })
+
         map('v', '<leader>hu', gitsigns.undo_stage_hunk, { desc = '[U]Undo staged hunk' })
         map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]Stage the whole buffer' })
+        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[R]Reset the whole buffer' })
         map('n', '<leader>hd', function()
           gitsigns.diffthis '~1'
         end, { desc = 'Show git [D]Difference of this file from last commit' })
+
         map('n', '<leader>hD', gitsigns.diffthis, { desc = 'Show git [D]Difference of this file from staged' })
+        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[P]Preview selected hunk' })
       end,
     },
   },

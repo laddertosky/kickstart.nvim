@@ -12,6 +12,7 @@ Pack="sudo apt install -y"
 $Pack nvim \
     jq \
     fzf \
+    ripgrep \
     unzip \
     npm \
     tmux

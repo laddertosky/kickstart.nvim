@@ -26,6 +26,15 @@ return {
       local jdtls_config = {
         settings = {
           java = {
+            configuration = {
+              runtimes = {
+                {
+                  name = 'JavaSE-1.8',
+                  path = '/usr/lib/jvm/java-8-openjdk-amd64/',
+                  default = true,
+                },
+              },
+            },
             saveActions = {
               organizeImports = true,
             },

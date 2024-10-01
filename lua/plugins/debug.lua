@@ -23,6 +23,9 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+
+    -- for closing the file tree when open the debug panel
+    'nvim-tree/nvim-tree.lua',
   },
   config = function()
     local dap = require 'dap'
@@ -62,7 +65,11 @@ return {
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<leader>dl', dapui.toggle, { desc = 'Debug: See last session result.' })
 
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+    dap.listeners.after.event_initialized['dapui_config'] = function()
+      local nvimtree = require 'nvim-tree.api'
+      nvimtree.tree.close()
+      dapui.open()
+    end
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 

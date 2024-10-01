@@ -14,6 +14,9 @@ return {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
 
+    -- Display virtual text for variables inline
+    'theHamsta/nvim-dap-virtual-text',
+
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
 
@@ -62,8 +65,24 @@ return {
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {}
 
+    -- Display variable values inline during debug
+    require('nvim-dap-virtual-text').setup {
+      display_callback = function(variable)
+        if #variable.value > 15 then
+          return ' ' .. string.sub(variable.value, 1, 15) .. '... '
+        end
+
+        return ' ' .. variable.value
+      end,
+    }
+
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<leader>dl', dapui.toggle, { desc = 'Debug: See last session result.' })
+
+    -- Eval var under cursor
+    vim.keymap.set('n', '<space>?', function()
+      dapui.eval(nil, { enter = true })
+    end)
 
     dap.listeners.after.event_initialized['dapui_config'] = function()
       local nvimtree = require 'nvim-tree.api'

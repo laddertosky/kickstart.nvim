@@ -9,7 +9,7 @@ if [ -z "$Pack" ]; then
 fi
 Pack="sudo apt install -y"
 
-$Pack nvim \
+$Pack neovim \
     jq \
     fzf \
     ripgrep \

@@ -147,6 +147,7 @@ return { -- LSP Configuration & Plugins
       -- tsserver = {},
       --
 
+      typos_lsp = {},
       pyright = {},
       lua_ls = {
         -- cmd = {...},

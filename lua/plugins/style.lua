@@ -37,4 +37,10 @@ return {
       require('ibl').setup { indent = { highlight = highlight } }
     end,
   },
+  {
+    'vim-lengthmatters',
+    config = function()
+      vim.g.lengthmatters_start_at_column = 101
+    end,
+  },
 }

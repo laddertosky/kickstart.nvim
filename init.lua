@@ -1,3 +1,4 @@
+require 'jacky.health'
 require 'jacky.global'
 require 'jacky.keymap'
 

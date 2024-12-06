@@ -14,8 +14,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
-vim.keymap.set('i', '<tab>', '<space><space><space><space>', { desc = 'Always use four spaces for tab.' })
-
 vim.keymap.set('n', 'z/', function()
   vim.bo.filetype = 'terminal'
   vim.o.wrap = true

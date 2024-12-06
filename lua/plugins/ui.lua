@@ -15,6 +15,11 @@ return {
     },
     config = function()
       require('noice').setup {
+        cmdline = {
+          format = {
+            git = { pattern = '^:%s*Gi?t?%s+', icon = 'git' },
+          },
+        },
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
           override = {

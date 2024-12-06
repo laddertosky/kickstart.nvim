@@ -21,7 +21,7 @@ return {
         c = { 'clang-format' },
         --
         -- Conform can also run multiple formatters sequentially
-        python = { 'isort', 'black' },
+        python = { 'isort' },
         json = { 'jq' },
 
         javascript = { 'prettier' },

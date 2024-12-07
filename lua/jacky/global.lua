@@ -76,6 +76,9 @@ vim.opt.hlsearch = true
 -- Set the shiftwidth, which could be inserted with <C-\>> in the visual mode
 vim.o.shiftwidth = 4
 
+-- Set the tab size
+vim.o.tabstop = 4
+
 -- Use space when user types tab
 vim.o.expandtab = true
 

@@ -71,6 +71,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]Search [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]Search [K]Keymaps' })
     vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]Search [F]Files' })
+    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]Search by [G]Grep' })
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]Search [S]Select Telescope' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]Search current [W]Word' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]Search [D]Diagnostics' })
@@ -101,7 +102,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]Search [N]Neovim files' })
 
-    -- Instead of using builtin.live_grep, I want to further filter based on file extensions
-    require('jacky.telescope').setup()
+    -- Shortcut for searching your Neovim plugin implementation files
+    vim.keymap.set('n', '<leader>sp', function()
+      builtin.find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data', 'lazy') }
+    end, { desc = '[S]Search Neovim [P]Plugins files' })
   end,
 }

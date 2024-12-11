@@ -33,6 +33,9 @@ return { -- Autocompletion
     --  into multiple repos for maintenance purposes.
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-omni',
+    'hrsh7th/cmp-cmdline',
   },
   config = function()
     -- See `:help cmp`
@@ -99,6 +102,12 @@ return { -- Autocompletion
         { name = 'luasnip' },
         { name = 'path' },
         { name = 'buffer' },
+        {
+          name = 'omni',
+          option = {
+            disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' },
+          },
+        },
       },
     }
 
@@ -107,5 +116,25 @@ return { -- Autocompletion
       { name = 'vim-dadbod-completion' },
       { name = 'buffer' },
     } })
+
+    cmp.setup.cmdline('/', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' },
+      },
+    })
+
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources {
+        { name = 'path' },
+        {
+          name = 'cmdline',
+          option = {
+            ignore_cmds = { 'Man', '!' },
+          },
+        },
+      },
+    })
   end,
 }

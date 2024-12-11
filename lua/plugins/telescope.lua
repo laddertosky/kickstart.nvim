@@ -58,6 +58,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
+        fzf = {},
       },
     }
 
@@ -72,7 +73,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]Search [F]Files' })
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]Search [S]Select Telescope' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]Search current [W]Word' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]Search by [G]Grep' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]Search [D]Diagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]Search [R]Resume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]Search Recent Files ("." for repeat)' })
@@ -100,5 +100,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]Search [N]Neovim files' })
+
+    -- Instead of using builtin.live_grep, I want to further filter based on file extensions
+    require('jacky.telescope').setup()
   end,
 }

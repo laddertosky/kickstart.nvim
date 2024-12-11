@@ -1,15 +1,13 @@
 return {
   {
-    'nvim-tree/nvim-tree.lua',
-    version = '*',
+    'stevearc/oil.nvim',
     lazy = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require('nvim-tree').setup {}
-
-      vim.keymap.set('n', '<leader>de', '<cmd>NvimTreeToggle<cr>', { silent = true })
+      require('oil').setup()
+      vim.keymap.set('n', '-', '<cmd>Oil<cr>', { silent = true, desc = 'Open parent directory' })
     end,
   },
 }

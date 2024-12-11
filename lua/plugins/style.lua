@@ -40,7 +40,7 @@ return {
   {
     'vim-lengthmatters',
     config = function()
-      vim.g.lengthmatters_start_at_column = 101
+      vim.g.lengthmatters_start_at_column = 81
     end,
   },
 }

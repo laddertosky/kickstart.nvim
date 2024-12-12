@@ -26,9 +26,6 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
-
-    -- for closing the file tree when open the debug panel
-    'nvim-tree/nvim-tree.lua',
   },
   config = function()
     local dap = require 'dap'
@@ -90,11 +87,7 @@ return {
       dapui.eval(nil, { enter = true })
     end)
 
-    dap.listeners.after.event_initialized['dapui_config'] = function()
-      local nvimtree = require 'nvim-tree.api'
-      nvimtree.tree.close()
-      dapui.open()
-    end
+    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 

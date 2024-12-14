@@ -5,6 +5,8 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]error messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]quickfix list' })
+vim.keymap.set('n', '[q', '<cmd>cprev<cr>', { desc = 'Go to prev [Q]quickfix item' })
+vim.keymap.set('n', ']q', '<cmd>cnext<cr>', { desc = 'Go to next [Q]quickfix item' })
 
 vim.keymap.set('n', 'z/', function()
   vim.bo.filetype = 'terminal'

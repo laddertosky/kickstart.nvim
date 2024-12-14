@@ -39,6 +39,9 @@ return { -- LSP Configuration & Plugins
         -- Find references for the word under your cursor.
         map('gr', require('telescope.builtin').lsp_references, '[G]Goto [R]References')
 
+        -- Find references for the word under your cursor and put into quickfix list.
+        map('<leader>rr', vim.lsp.buf.references, 'List [R]References')
+
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
         map('gI', require('telescope.builtin').lsp_implementations, '[G]Goto [I]Implementation')

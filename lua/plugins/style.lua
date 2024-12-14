@@ -43,4 +43,8 @@ return {
       vim.g.lengthmatters_start_at_column = 81
     end,
   },
+  {
+    -- use :ColorizerToggle to toggle display all hex color codes with color
+    'norcalli/nvim-colorizer.lua',
+  },
 }

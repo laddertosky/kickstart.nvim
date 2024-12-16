@@ -35,3 +35,11 @@ vim.api.nvim_create_autocmd('TermOpen', {
     vim.cmd.startinsert()
   end,
 })
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = 'term://*',
+  group = vim.api.nvim_create_augroup('nvim-terminal-enter', { clear = true }),
+  callback = function(_)
+    vim.cmd.startinsert()
+  end,
+})

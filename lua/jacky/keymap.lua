@@ -43,3 +43,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     vim.cmd.startinsert()
   end,
 })
+
+vim.keymap.set('n', '<a-r>', '<cmd>source %<cr>', { desc = 'Reload current file' })
+vim.keymap.set('n', '<leader>x', ':.lua<CR>')
+vim.keymap.set('v', '<leader>x', ':lua<CR>')

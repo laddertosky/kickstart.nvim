@@ -14,6 +14,10 @@ return {
       'rcarriga/nvim-notify',
     },
     config = function()
+      require('notify').setup {
+        timeout = 3,
+      }
+
       require('noice').setup {
         cmdline = {
           format = {

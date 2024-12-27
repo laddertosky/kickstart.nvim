@@ -47,3 +47,17 @@ vim.api.nvim_create_autocmd('BufEnter', {
 vim.keymap.set('n', '<a-r>', '<cmd>source %<cr>', { desc = 'Reload current file' })
 vim.keymap.set('n', '<leader>x', ':.lua<CR>')
 vim.keymap.set('v', '<leader>x', ':lua<CR>')
+
+vim.api.nvim_create_user_command('SortLines', function()
+  local start_row = vim.api.nvim_buf_get_mark(0, '<')[1]
+  local end_row = vim.api.nvim_buf_get_mark(0, '>')[1]
+
+  if start_row > end_row then
+    end_row, start_row = start_row, end_row
+  end
+
+  local selected_lines = vim.api.nvim_buf_get_lines(0, start_row, end_row, false)
+
+  local sorted_lines = vim.fn.sort(selected_lines)
+  vim.api.nvim_buf_set_lines(0, start_row, end_row, false, sorted_lines)
+end, { desc = 'sort the selected lines', range = 2 })

@@ -82,6 +82,9 @@ vim.o.tabstop = 4
 -- Use space when user types tab
 vim.o.expandtab = true
 
+-- Highlight the column with offset from textwidth
+vim.opt.colorcolumn = '+1'
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 

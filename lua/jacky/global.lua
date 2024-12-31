@@ -74,13 +74,13 @@ vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 
 -- Set the shiftwidth, which could be inserted with <C-\>> in the visual mode
-vim.o.shiftwidth = 4
+vim.opt.shiftwidth = 4
 
 -- Set the tab size
-vim.o.tabstop = 4
+vim.opt.tabstop = 4
 
 -- Use space when user types tab
-vim.o.expandtab = true
+vim.opt.expandtab = true
 
 -- Highlight the column with offset from textwidth
 vim.opt.colorcolumn = '+1'

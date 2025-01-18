@@ -13,6 +13,9 @@ return { -- LSP Configuration & Plugins
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
+
+    -- my forked version from 'Decodetalkers/csharpls-extended-lsp.nvim'
+    { 'laddertosky/csharpls-extended-lsp.nvim' },
   },
   config = function()
     --  This function gets run when an LSP attaches to a particular buffer.
@@ -22,6 +25,8 @@ return { -- LSP Configuration & Plugins
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+
         -- NOTE: Remember that Lua is a real programming language, and as such it is possible
         -- to define small helper and utility functions so you don't have to repeat yourself.
         --
@@ -34,7 +39,14 @@ return { -- LSP Configuration & Plugins
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
-        map('gd', require('telescope.builtin').lsp_definitions, '[G]Goto [D]Definition')
+        map('gd', function()
+          if client and client.name == 'csharp_ls' then
+            local ext = require('telescope').load_extension 'csharpls_definition'
+            ext['csharpls_definition']()
+          else
+            require('telescope.builtin').lsp_definitions()
+          end
+        end, '[G]Goto [D]Definition')
 
         -- Find references for the word under your cursor.
         map('gr', require('telescope.builtin').lsp_references, '[G]Goto [R]References')
@@ -80,7 +92,6 @@ return { -- LSP Configuration & Plugins
         --    See `:help CursorHold` for information about when this is executed
         --
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
         if client and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
@@ -115,6 +126,12 @@ return { -- LSP Configuration & Plugins
       clangd = {},
       typos_lsp = {},
       pyright = {},
+      csharp_ls = {
+        handlers = {
+          ['textDocument/typeDefinition'] = require('csharpls_extended').handler,
+          ['textDocument/definition'] = require('csharpls_extended').handler,
+        },
+      },
       gopls = {
         analyses = {
           unusedparams = true,
@@ -183,6 +200,7 @@ return { -- LSP Configuration & Plugins
       'jq',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+    require('telescope').load_extension 'csharpls_definition'
 
     require('mason-lspconfig').setup {
       handlers = {

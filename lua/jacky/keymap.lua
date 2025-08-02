@@ -27,6 +27,13 @@ vim.keymap.set('t', '<c-j>', '<c-\\><c-n><c-w>j<cr>', { silent = true })
 vim.keymap.set('t', '<c-k>', '<c-\\><c-n><c-w>k<cr>', { silent = true })
 vim.keymap.set('t', '<c-l>', '<c-\\><c-n><c-w>l<cr>', { silent = true })
 
+vim.keymap.set('n', 'n', 'nzzzv', { silent = true })
+vim.keymap.set('n', 'N', 'Nzzzv', { silent = true })
+vim.keymap.set('n', '<c-u>', '<c-u>zz', { silent = true })
+vim.keymap.set('n', '<c-n>', '<c-n>zz', { silent = true })
+vim.keymap.set('n', '<c-b>', '<c-b>zz', { silent = true })
+vim.keymap.set('n', '<c-f>', '<c-f>zz', { silent = true })
+
 vim.api.nvim_create_autocmd('TermOpen', {
   group = vim.api.nvim_create_augroup('nvim-terminal', { clear = true }),
   callback = function(_)

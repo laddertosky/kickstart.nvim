@@ -106,6 +106,7 @@ return {
     -- Install golang specific config
     require('dap-go').setup()
     require('dap-python').setup()
+    dap.defaults.fallback.auto_continue_if_many_stopped = false
 
     dap.adapters.cppdbg = {
       id = 'cppdbg',
@@ -122,7 +123,9 @@ return {
         type = 'cppdbg',
         request = 'launch',
         program = function()
-          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          local filename = vim.fn.expand('%:t:r')  -- Get current file name without extension
+          local filepath = vim.fn.getcwd() .. '/' .. filename
+          return vim.fn.input('Path to executable: ', filepath, 'file')
         end,
         cwd = '${workspaceFolder}',
         stopAtEntry = true,
@@ -133,6 +136,17 @@ return {
             ignoreFailures = false,
           },
         },
+        args = function()
+            local args_string = vim.fn.input("Input arguments: ")
+            local raw_args = vim.split(args_string, " ", true)
+            local filtered_args = {}
+            for _, arg in ipairs(raw_args) do
+              if arg ~= "" then
+                table.insert(filtered_args, arg)
+              end
+            end
+            return filtered_args
+        end,
       },
       {
         name = 'Attach to gdbserver :1234',
@@ -143,7 +157,9 @@ return {
         miDebuggerPath = '/usr/bin/gdb',
         cwd = '${workspaceFolder}',
         program = function()
-          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          local filename = vim.fn.expand('%:t:r')  -- Get current file name without extension
+          local filepath = vim.fn.getcwd() .. '/' .. filename
+          return vim.fn.input('Path to executable: ', filepath, 'file')
         end,
         setupCommands = {
           {
@@ -152,6 +168,17 @@ return {
             ignoreFailures = false,
           },
         },
+        args = function()
+            local args_string = vim.fn.input("Input arguments: ")
+            local raw_args = vim.split(args_string, " ", true)
+            local filtered_args = {}
+            for _, arg in ipairs(raw_args) do
+              if arg ~= "" then
+                table.insert(filtered_args, arg)
+              end
+            end
+            return filtered_args
+        end,
       },
     }
     dap.configurations.c = dap.configurations.cpp
